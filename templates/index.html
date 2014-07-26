@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <title>Product Hunt</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+    <link href="/static/css/nprogress.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/global.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="header">
+        Product Hunt
+        {% raw %}
+        <script class="header-ph-temp" type="x-tmpl-mustache">
+            Product Hunt
+        </script>
+        <script class="header-back-temp" type="x-tmpl-mustache">
+            <div class="back">Back to Product Hunt</div>
+            <a class="tab" href="{{ url }}" target="_blank">Open page in new tab</a>
+        </script>
+        {% endraw %}
+    </div>
+
+    <div class="list">
+        {% raw %}
+        <script class="date-temp" type="x-tmpl-mustache">
+            <div class="date">{{ date }}</div>
+        </script>
+        <script class="post-temp" type="x-tmpl-mustache">
+            <div class="post">
+                <a class="link" href="{{ url }}">
+                    <div>
+                        <span class="score">{{ score }}</span>
+                        <span class="title">{{ title }}</span>
+                    </div>
+                    <div class="tag">{{ tag }}</div>
+                </a>
+                <a class="perma" href="http://producthunt.com{{ perma }}">
+                    c
+                </a>
+            </div>
+        </script>
+        {% endraw %}
+    </div>
+
+    <div class="page">
+    {% raw %}
+        <script class="page-load-temp" type="x-tmpl-mustache">
+            //
+        </script>
+        <script class="page-temp" type="x-tmpl-mustache">
+            <iframe src="{{ url }}"></iframe>
+        </script>
+        {% endraw %}
+    </div>
+
+    <div class="comments"></div>
+
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js' type='text/javascript'></script>
+    <script src='/static/js/mustache.min.js' type='text/javascript'></script>
+    <script src='/static/js/nprogress.min.js' type='text/javascript'></script>
+    <script src='/static/js/index.js' type='text/javascript'></script>
+</body>
+</html>
