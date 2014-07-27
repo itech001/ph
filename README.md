@@ -7,21 +7,17 @@ heavily inspired by [hn.premii.com](hn).
 
 ## Features
 
-- 5 pages of content
-  - Ph stores five pages of the latest Product Hunt content. One page is equal to
+- **5 pages of content.** Ph stores five pages of the latest Product Hunt content. One page is equal to
 three days of products, meaning you can browse as far back as fifteen days ago.
 
-- Inline product viewer
-  - Ph allows you to view products within the app, meaning no mobile tab clutter.
+- **Inline product viewer.** Ph allows you to view products within the app, meaning no mobile tab clutter.
 
-- Inline comments
-  - Product Hunt would be nothing without the community, which is why you can read
+- **Inline comments.** Product Hunt would be nothing without the community, which is why you can read
 mobile-optimized comments without leaving the app. Unfortunately it's currently
 read-only due to the lack of Product Hunt POST (or any) API
 (Ryan Hoover [plz](api plz)).
 
-- Infinite scrolling
-  - There's no mobile optimized without infinite scrolling. That is all.
+- **Infinite scrolling.** There's no mobile optimized without infinite scrolling. That is all.
 
 
 ## Development
@@ -52,22 +48,19 @@ The core of Ph is all Python based, but Node.js is used for Stylus/Nib.
 
 # TODO
 
-- Scrape links/images from comments
-  - Currently **scrape.py** only gets text from comments. If a link's text is its
+- **Scrape links/images from comments.** Currently **scrape.py** only gets text from comments. If a link's text is its
 URL (eg [http://example.com](ex)) **index.js** can convert it to a clickable
 URL with Regex, but if a link's URL is hidden (eg [example](ex)) then the
 client will just display the text (eg "example"). This along with no image
 support should be fixed in **scrape.py**.
 
-- Iframe error handling and reports
-  - Though it's very rare with new websites or startups (ie the kinds of things
+- **Iframe error handling and reports.** Though it's very rare with new websites or startups (ie the kinds of things
 shared on Product Hunt), some websites block iframes which Ph uses to display
 them within the app. When this happens the user should be notified. Also, even
 more rarely iframes REDIRECT the parent website to their own URL. This should
 be blocked.
 
-- More clear infinite scrolling
-  - There should be indications when the next page is trying to load or when all
+- **More clear infinite scrolling.** There should be indications when the next page is trying to load or when all
 five pages have already been loaded.
 
 
