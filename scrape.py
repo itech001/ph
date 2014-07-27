@@ -33,7 +33,6 @@ def scrape_page(num):
         print('updated page ' + str(num))
 
 def scrape_disc(perma):
-    print('scraping discussion ' + perma)
     disc = {'perma': perma, 'comments': [], 'updated': time()}
     ph = requests.get(ph_url + perma)
     soup = BeautifulSoup(ph.text)
@@ -58,13 +57,14 @@ def scrape_disc(perma):
         disc['comments'].append(data)
 
     db.discs.update({'perma': perma}, disc, True)
-    print('updated discussion ' + str(perma))
+    print('scraped discussion ' + str(perma))
     return count
 
 def loop():
     for i in range(5):
-        sleep(30)
         scrape_page(i)
+        print('sleeping for 30 seconds')
+        sleep(30)
 
     loop()
 
