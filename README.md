@@ -8,13 +8,11 @@ heavily inspired by [hn.premii.com](hn).
 ## Features
 
 - 5 pages of content
-
-Ph stores five pages of the latest Product Hunt content. One page is equal to
+- - Ph stores five pages of the latest Product Hunt content. One page is equal to
 three days of products, meaning you can browse as far back as fifteen days ago.
 
 - Inline product viewer
-
-Ph allows you to view products within the app, meaning no mobile tab clutter.
+  - Ph allows you to view products within the app, meaning no mobile tab clutter.
 
 - Inline comments
 
@@ -50,7 +48,7 @@ you load the page).
 - Node.js (`npm install`)
   - stylus
   - nib
-  -
+
 The core of Ph is all Python based, but Node.js is used for Stylus/Nib.
 
 
