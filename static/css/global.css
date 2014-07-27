@@ -1,10 +1,13 @@
 body {
   font-family: 'Open Sans';
+  font-size: 16px;
   margin: 0;
   overflow: hidden;
+  color: #3d3d3d;
 }
 a {
   text-decoration: none;
+  color: #da552f;
 }
 .header {
   position: fixed;
@@ -21,11 +24,13 @@ a {
 .header .back {
   float: left;
   width: 50%;
+  background: linear-gradient(to left, #da552f 2%, #dd6643 0, #da552f 10%);
 }
 .header .tab {
   float: left;
   width: 50%;
   color: #fff;
+  background: linear-gradient(to right, #da552f 2%, #dd6643 0, #da552f 10%);
 }
 .list {
   position: fixed;
@@ -49,19 +54,48 @@ a {
   height: 100%;
   border: 0;
 }
+.discussion {
+  position: absolute;
+  top: 40px;
+  left: 100%;
+  width: 100%;
+  transition: left 0.5s;
+  height: calc(100% - 40px);
+  overflow: auto;
+  background-color: #eee;
+}
+.discussion .author {
+  height: 40px;
+}
+.discussion .comment {
+  padding: 18px 12px;
+  border: 1px solid #ccc;
+  margin-top: -1px;
+  background-color: #fff;
+}
+.discussion .children .comment {
+  margin-left: 18px;
+}
+.discussion .name {
+  font-weight: bold;
+}
+.discussion .text {
+  font-size: 16px;
+}
 .date {
-  color: #999;
-  height: 50px;
-  line-height: 50px;
+  color: #919191;
+  height: 59px;
+  line-height: 58px;
   text-align: center;
   font-weight: bold;
-  border-bottom: 1px solid #808080;
-  border-right: 50px solid #808080;
+  border-right: 50px solid #eee;
 }
 .post {
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid #808080;
+  border-bottom: 1px solid #dedede;
+  border-top: 1px solid #dedede;
+  margin-top: -1px;
 }
 .post .link {
   float: left;
@@ -69,22 +103,42 @@ a {
   box-sizing: border-box;
   padding: 8px;
 }
+.post .link .top {
+  margin-bottom: 2px;
+}
 .post .link .score {
-  font-size: 12;
-  color: #999;
+  font-size: 12px;
+  color: #919191;
+  position: relative;
+  top: -1px;
 }
 .post .link .title {
+  margin-left: 4px;
   font-size: 16px;
-  color: #000;
+  color: #242424;
 }
 .post .link .tag {
   font-size: 14px;
-  color: #999;
+  color: #919191;
 }
 .post .perma {
   position: absolute;
   float: left;
   width: 50px;
   height: 100%;
-  background-color: #808080;
+  background-color: #eee;
+}
+.post .perma img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -12px;
+  margin-left: -13px;
+}
+.post .perma .comment-count {
+  position: relative;
+  top: 50%;
+  font-size: 10px;
+  text-align: center;
+  margin: -1em 0.3em 0 0;
 }

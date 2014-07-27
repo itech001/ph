@@ -3,10 +3,23 @@ from glob import glob
 from flask import Flask, render_template, request, jsonify
 from stylus import Stylus
 from pymongo import MongoClient
+app = Flask(__name__)
 
+@app.route('/')
+def index():
+    if app.debug:
+        compile()
+    return render_template('index.html')
 
+@app.route('/page', methods=['POST'])
+def page():
+    num = dict(request.form)['num'][0]
+    return jsonify(json=db.pages.find_one({'num': int(num)})['days'])
 
-# configure
+@app.route('/disc', methods=['POST'])
+def disc():
+    perma = dict(request.form)['perma'][0]
+    return jsonify(json=db.discs.find_one({'perma': perma})['comments'])
 
 def compile():
     compiler = Stylus()
@@ -19,41 +32,8 @@ def compile():
         styl.close()
         css.close()
 
-compile()
-app = Flask(__name__)
-db = MongoClient().ph
-
-
-
-# index
-
-@app.route('/')
-def index():
-    if app.debug:
-        compile()
-    return render_template('index.html')
-
-
-
-# page
-
-@app.route('/page', methods=['POST'])
-def page():
-    num = dict(request.form)['num'][0]
-    return jsonify(json=db.pages.find_one({'num': int(num)})['days'])
-
-
-
-# discussion
-
-@app.route('/disc', methods=['POST'])
-def disc():
-    perma = dict(request.form)['perma'][0]
-    return jsonify(json=scrape_ph.discussion(perma)['comments'])
-
-
-
-# run
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    compile()
+    db = MongoClient().ph
+    app.debug = True # turn on when developing for auto-compiling & debugging
+    app.run(port=4001)

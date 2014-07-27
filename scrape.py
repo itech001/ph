@@ -1,9 +1,7 @@
 import requests
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
-from time import time
-
-
+from time import time, sleep
 
 def scrape_page(num):
     print('scraping page ' + str(num))
@@ -20,59 +18,57 @@ def scrape_page(num):
 
             for post in ph_day.find_all(class_='post'):
                 url = post.find(class_='post-url')['href']
+                perma = post.find(class_='view-discussion')['href']
+                comments = scrape_disc(perma)
                 data = {'title': post.find(class_='post-url').text,
                         'tag': post.find(class_='post-tagline').text,
                         'url': requests.get(ph_url + url, verify=False).url,
                         'score': post.find(class_='vote-count').text,
-                        'perma': post.find(class_='view-discussion')['href']}
+                        'perma': perma,
+                        'comments': comments}
                 page['days'][date].append(data)
-                scrape_disc(data['perma'])
+                sleep(5)
 
-        try:
-          db.pages.update({'num': num}, page, True)
-        except:
-          print('Exception updating page :0')
-          pass
-
+        db.pages.update({'num': num}, page, True)
         print('updated page ' + str(num))
-
-
 
 def scrape_disc(perma):
     print('scraping discussion ' + perma)
     disc = {'perma': perma, 'comments': [], 'updated': time()}
     ph = requests.get(ph_url + perma)
     soup = BeautifulSoup(ph.text)
+    count = 0
 
     for thread in soup.find_all(class_='comment-thread'):
+        count += 1
         data = {'name': thread.find(class_='comment-user-name').text,
                 'handle': thread.find(class_='comment-user-handle').text,
-                'text': str(thread.find(class_='actual-comment')),
+                'text': ''.join(thread.find(class_='actual-comment')
+                                      .find_all(text=True)),
                 'children': []}
 
         for child in thread.find_all(class_='comment child'):
+            count += 1
             data['children'].append({
                 'name': child.find(class_='comment-user-name').text,
                 'handle': child.find(class_='comment-user-handle').text,
-                'text': str(child.find(class_='actual-comment'))})
+                'text': ''.join(child.find(class_='actual-comment')
+                                     .find_all(text=True))})
 
         disc['comments'].append(data)
 
     db.discs.update({'perma': perma}, disc, True)
     print('updated discussion ' + str(perma))
-
-
+    return count
 
 def loop():
     for i in range(5):
+        sleep(30)
         scrape_page(i)
 
     loop()
 
-
-
-ph_url = 'http://www.producthunt.com'
-db = MongoClient().ph
-
 if __name__ == '__main__':
+    ph_url = 'http://www.producthunt.com'
+    db = MongoClient().ph
     loop()

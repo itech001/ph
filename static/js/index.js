@@ -28,7 +28,8 @@ function getPage(num) {
                     tag: post.tag,
                     url: post.url,
                     perma: post.perma,
-                    score: post.score
+                    score: post.score,
+                    comments: post.comments
                 }));
             }
         }
@@ -47,11 +48,13 @@ var dateTemp = $('.date-temp').html();
 var pageTemp = $('.page-temp').html();
 var headerBackTemp = $('.header-back-temp').html();
 var headerPhTemp = $('.header-ph-temp').html();
+var commentTemp = $('.comment-temp').html();
 Mustache.parse(postTemp);
 Mustache.parse(dateTemp);
 Mustache.parse(pageTemp);
 Mustache.parse(headerPhTemp);
 Mustache.parse(headerBackTemp);
+Mustache.parse(commentTemp);
 var open = 'list';
 var loading = true;
 var nextPage = 0
@@ -83,19 +86,58 @@ $('body').on('click', '.link', function(e) {
                 NProgress.done();
             });
         }
-    }, 1000, this);
+    }, 500, this);
+});
+
+function formatComment(text) {
+    var urlExp = /(\bhttps?:\/\/\S+)/ig;
+    return text.replace(/\r/g, '<br><br>')
+               .replace(urlExp, '<a href="$1" target="_blank">$1</a>')
+}
+
+$('body').on('click', '.perma', function(e) {
+    e.preventDefault();
+    open = 'discussion';
+    $('.list').css({left: '-100%'});
+    $('.discussion').css({left: 0});
+    $('.discussion').html('');
+    $('.header').html(Mustache.render(headerBackTemp, {
+        url: this.href
+    }));
+
+    $.post('/disc', {perma: this.href.split('.com')[1]}, function(comments) {
+        for(var i = 0; i < comments.json.length; i++) {
+            var comment = comments.json[i];
+            var children = ''
+
+            for(var j = 0; j < comment.children.length; j++) {
+                children += Mustache.render(commentTemp, {
+                    name: comment.children[j].name,
+                    handle: comment.children[j].handle,
+                    text: formatComment(comment.children[j].text)
+                });
+            }
+
+            $('.discussion').append(Mustache.render(commentTemp, {
+                name: comment.name,
+                handle: comment.handle,
+                text: formatComment(comment.text),
+                children: children
+            }));
+        }
+    });
 });
 
 $('body').on('click', '.back', function() {
     open = 'list';
     NProgress.done();
     $('.list').css({left: 0});
-    $('.page').css({left: '100%'});
+    $('.page, .discussion').css({left: '100%'});
     $('.header').html(Mustache.render(headerPhTemp))
 
     setTimeout(function() {
         if(open == 'list') {
-            $('.page').html('');
+            $('.page, .discussion').html('');
         }
-    }, 1000);
+    }, 500);
 });
