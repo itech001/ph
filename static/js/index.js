@@ -8,12 +8,11 @@ function getPage(num) {
         }
 
         keys.sort().reverse();
-        console.log(keys);
 
         for(var i = 0; i < keys.length; i++) {
             var day = page.json[keys[i]];
             var date = new Date(
-                keys[i].replace(/(\d{2})-(\d{2})-(\d{4})/, '$2/$1/$3')
+                keys[i].replace(/(\d{4})-(\d{2})-(\d{2})/, '$1/$2/$3')
             );
 
             $('.list').append(Mustache.render(dateTemp, {
