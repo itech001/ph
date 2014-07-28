@@ -66,8 +66,8 @@ the parent website to their own URL. This should be blocked.
 page is trying to load or when all five pages have already been loaded.
 
 
-[ph]: ph.bram.gg
-[hn]: hn.premii.com
+[ph]: http://ph.bram.gg
+[hn]: http://hn.premii.com
 [api plz]: https://twitter.com/intent/tweet?text=%40rrhoover+Product+Hunt+api+plz+ty
 [stylus]: https://learnboost.github.io/stylus/
 [nib]: https://visionmedia.github.io/nib/
