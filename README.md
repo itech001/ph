@@ -11,8 +11,8 @@ heavily inspired by [hn.premii.com][hn].
 content. One page is equal to three days of products, meaning you can browse as
 far back as fifteen days ago.
 
-- **Inline product viewer.** Ph allows you to view products within the app,
-meaning no mobile tab clutter.
+- **Inline product viewer.** Ph allows you to view product websites within the
+app using iframes, meaning no mobile tab clutter.
 
 - **Inline comments.** Product Hunt would be nothing without the community,
 which is why you can read mobile-optimized comments without leaving the app.
