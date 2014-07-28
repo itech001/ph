@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from os import getcwd as cwd
 from glob import glob
 from flask import Flask, render_template, request, jsonify
@@ -35,5 +37,5 @@ def compile():
 if __name__ == '__main__':
     compile()
     db = MongoClient().ph
-    app.debug = False # turn on when developing for auto-compiling & debugging
+    app.debug = True # turn on when developing for auto-compiling & debugging
     app.run(port=4001)
