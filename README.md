@@ -1,8 +1,8 @@
 # Ph
 
-[Ph](ph) is a *good* mobile web interface for Product Hunt. Visit
-[ph.bram.gg](ph) on your **mobile device** to experience the awesome! Ph was
-heavily inspired by [hn.premii.com](hn).
+[Ph][ph] is a *good* mobile web interface for Product Hunt. Visit
+[ph.bram.gg][ph] on your **mobile device** to experience the awesome! Ph was
+heavily inspired by [hn.premii.com][hn].
 
 
 ## Features
@@ -17,14 +17,14 @@ meaning no mobile tab clutter.
 - **Inline comments.** Product Hunt would be nothing without the community,
 which is why you can read mobile-optimized comments without leaving the app.
 Unfortunately it's currently read-only due to the lack of Product Hunt POST (or
-any) API (Ryan Hoover [plz](api plz)).
+any) API (Ryan Hoover [plz][api plz]).
 
 - **Infinite scrolling.** Pressing buttons is *soo* 2013.
 
 
 ## Development
 
-Ph uses [Stylus](stylus) with [Nib](nib) for CSS.
+Ph uses [Stylus][stylus] with [Nib][nib] for CSS.
 
 Scrape at least one page of Product Hunt with *scrape.py* before running
 *app.py* and viewing Ph at `localhost:4001`. When developing switch
@@ -51,9 +51,9 @@ The core of Ph is all Python based, but Node.js is used for Stylus/Nib.
 # TODO
 
 - **Scrape links/images from comments.** Currently *scrape.py* only gets text
-from comments. If a link's text is its URL (eg [http://example.com](ex))
+from comments. If a link's text is its URL (eg [http://example.com][ex])
 *index.js* can convert it to a clickable URL with Regex, but if a link's URL is
-hidden (eg [example](ex)) then the client will just display the text (eg
+hidden (eg [example][ex]) then the client will just display the text (eg
 "example"). This along with no image support should be fixed in *scrape.py*.
 
 - **Iframe error handling and reports.** Though it's very rare with new
