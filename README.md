@@ -18,7 +18,8 @@ which is why you can read mobile-optimized comments without leaving the app.
 Unfortunately it's currently read-only due to the lack of Product Hunt POST (or
 any) API (Ryan Hoover [plz][api plz]).
 
-- **Infinite scrolling.** Pressing buttons is *soo* 2013.
+- **Hybrid scrolling.** It's like infinite scrolling, but without the sudden
+unexpected lag on mobile!
 
 
 ## Development
