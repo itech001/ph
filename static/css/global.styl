@@ -41,7 +41,7 @@ a
     background linear-gradient(to right, ph-red 2%, mix(#ffffff, ph-red, 10%) 0, ph-red 10%)
 
 .list
-  position fixed
+  position absolute
   top 40px
   left 0
   width 100%
@@ -51,7 +51,6 @@ a
   -webkit-overflow-scrolling touch
 
 .page
-  display none
   position absolute
   top 40px
   left 100%
@@ -65,7 +64,6 @@ a
     border 0
 
 .discussion
-  display none
   position absolute
   top 40px
   left 100%
@@ -80,6 +78,7 @@ a
     height 40px
 
   .comment
+    overflow hidden
     padding 18px 12px
     border 1px solid #cccccc
     margin-top -1px
