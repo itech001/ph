@@ -7,9 +7,8 @@ heavily inspired by [hn.premii.com][hn].
 
 ## Features
 
-- **5 pages of content.** Ph stores five pages of the latest Product Hunt
-content. One page is equal to three days of products, meaning you can browse as
-far back as fifteen days ago.
+- **9 days of products.** Ph stores five pages (9 days) of the latest Product
+Hunt content. Most people will never need to look back that far.
 
 - **Inline product viewer.** Ph allows you to view product websites within the
 app using iframes, meaning no mobile tab clutter.

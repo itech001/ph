@@ -7,32 +7,43 @@ from time import time, sleep
 
 def scrape_page(num):
     print('scraping page ' + str(num))
-    page = db.pages.find_one({'num': num})
+    page = {'num': num, 'days': {}, 'updated': time()}
+    ph = requests.get(ph_url + '?page=' + str(num))
+    soup = BeautifulSoup(ph.text)
 
-    if not page or time() - page['updated'] > 300:
-        page = {'num': num, 'days': {}, 'updated': time()}
-        ph = requests.get(ph_url + '?page=' + str(num))
-        soup = BeautifulSoup(ph.text)
+    # for some reason Product Hunt starts page 1 one day after page 0, so on
+    # page 0 we only want the first day
+    if num == 0:
+        days = [soup.find(class_='day')]
+    else:
+        days = soup.find_all(class_='day')
 
-        for ph_day in soup.find_all(class_='day'):
-            date = ph_day.find(class_='date')['datetime']
-            page['days'][date] = []
+    for ph_day in days:
+        date = ph_day.find(class_='date')['datetime']
+        page['days'][date] = []
 
-            for post in ph_day.find_all(class_='post'):
-                url = post.find(class_='post-url')['href']
-                perma = post.find(class_='view-discussion')['href']
-                comments = scrape_disc(perma)
-                data = {'title': post.find(class_='post-url').text,
-                        'tag': post.find(class_='post-tagline').text,
-                        'url': requests.get(ph_url + url, verify=False).url,
-                        'score': post.find(class_='vote-count').text,
-                        'perma': perma,
-                        'comments': comments}
-                page['days'][date].append(data)
-                sleep(5)
+        for post in ph_day.find_all(class_='post'):
+            url = ph_url + post.find(class_='post-url')['href']
 
-        db.pages.update({'num': num}, page, True)
-        print('updated page ' + str(num))
+            try:
+                url = requests.get(url, verify=False).url
+            except Exception:
+                print('an exception occured, using PH redirect URL')
+                pass
+
+            perma = post.find(class_='view-discussion')['href']
+            comments = scrape_disc(perma)
+            data = {'title': post.find(class_='post-url').text,
+                    'tag': post.find(class_='post-tagline').text,
+                    'url': url,
+                    'score': post.find(class_='vote-count').text,
+                    'perma': perma,
+                    'comments': comments}
+            page['days'][date].append(data)
+            sleep(5)
+
+    db.pages.update({'num': num}, page, True)
+    print('updated page ' + str(num))
 
 def scrape_disc(perma):
     disc = {'perma': perma, 'comments': [], 'updated': time()}

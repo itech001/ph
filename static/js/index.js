@@ -1,4 +1,5 @@
 function getPage(num) {
+    console.log('getting page ' + num);
     $.post('/page', {num: num}, function(page) {
         nextPage++;
         var keys = []

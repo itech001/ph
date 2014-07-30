@@ -37,5 +37,5 @@ def compile():
 if __name__ == '__main__':
     compile()
     db = MongoClient().ph
-    app.debug = True # turn on when developing for auto-compiling & debugging
+    app.debug = False # turn on when developing for auto-compiling & debugging
     app.run(port=4001)
