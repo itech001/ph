@@ -29,6 +29,7 @@ a
   background-color ph-red
 
   .back
+    cursor pointer
     float left
     width 50%
     background linear-gradient(to left, ph-red 2%, mix(#ffffff, ph-red, 10%) 0, ph-red 10%)
@@ -46,9 +47,11 @@ a
   width 100%
   height calc(100% - 40px)
   transition left 0.5s
-  overflow auto
+  overflow-y scroll
+  -webkit-overflow-scrolling touch
 
 .page
+  display none
   position absolute
   top 40px
   left 100%
@@ -62,13 +65,15 @@ a
     border 0
 
 .discussion
+  display none
   position absolute
   top 40px
   left 100%
   width 100%
   transition left 0.5s
   height calc(100% - 40px)
-  overflow auto
+  overflow-y scroll
+  -webkit-overflow-scrolling touch
   background-color gray1
 
   .author
