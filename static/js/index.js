@@ -60,6 +60,12 @@ var loading = true;
 var nextPage = 0
 getPage(nextPage);
 
+$('.header').click(function() {
+    if(open == 'list') {
+        $('.list').animate({scrollTop: 0});
+    }
+});
+
 $('.list').scroll(function() {
     if(!loading && $('.list').prop('scrollHeight') - $('.list').scrollTop() < 1500) {
         loading = true;
