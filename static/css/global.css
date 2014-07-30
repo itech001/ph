@@ -24,6 +24,7 @@ a {
 .header .back {
   float: left;
   width: 50%;
+  color: #fff;
   background: linear-gradient(to left, #da552f 2%, #dd6643 0, #da552f 10%);
 }
 .header .tab {
@@ -39,10 +40,11 @@ a {
   width: 100%;
   height: calc(100% - 40px);
   transition: left 0.5s;
-  overflow: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 .page {
-  position: absolute;
+  position: fixed;
   top: 40px;
   left: 100%;
   width: 100%;
@@ -55,19 +57,21 @@ a {
   border: 0;
 }
 .discussion {
-  position: absolute;
+  position: fixed;
   top: 40px;
   left: 100%;
   width: 100%;
   transition: left 0.5s;
   height: calc(100% - 40px);
-  overflow: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   background-color: #eee;
 }
 .discussion .author {
   height: 40px;
 }
 .discussion .comment {
+  overflow: hidden;
   padding: 18px 12px;
   border: 1px solid #ccc;
   margin-top: -1px;
