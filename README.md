@@ -62,9 +62,6 @@ websites block iframes which Ph uses to display them within the app. When this
 happens the user should be notified. Also, even more rarely iframes REDIRECT
 the parent website to their own URL. This should be blocked.
 
-- **More clear infinite scrolling.** There should be indications when the next
-page is trying to load or when all five pages have already been loaded.
-
 
 [ph]: http://ph.bram.gg
 [hn]: http://hn.premii.com
