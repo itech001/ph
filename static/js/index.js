@@ -16,14 +16,14 @@ function getPage(num) {
                 keys[i].replace(/(\d{4})-(\d{2})-(\d{2})/, '$1/$2/$3')
             );
 
-            $('.list').append(Mustache.render(dateTemp, {
+            $('.list > .above-footer').append(Mustache.render(dateTemp, {
                 date: date.toDateString().slice(0, 10)
             }));
 
             for(var j = 0; j < day.length; j++) {
                 var post = day[j];
 
-                $('.list').append(Mustache.render(postTemp, {
+                $('.list > .above-footer').append(Mustache.render(postTemp, {
                     title: post.title,
                     tag: post.tag,
                     url: post.url,
@@ -34,6 +34,8 @@ function getPage(num) {
             }
         }
 
+        $('.footer').text((num < 4) ? 'Load 2 more days of products'
+                                    : "You can't scroll any farther back! :0");
         loading = false;
     });
 }
@@ -66,9 +68,10 @@ $('.header').click(function() {
     }
 });
 
-$('.list').scroll(function() {
-    if(!loading && $('.list').prop('scrollHeight') - $('.list').scrollTop() < 1500) {
+$('.footer').click(function() {
+    if(nextPage < 5 && !loading) {
         loading = true;
+        $('.footer').text('Loading...');
         getPage(nextPage);
     }
 });

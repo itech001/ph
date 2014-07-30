@@ -23,26 +23,29 @@
     </div>
 
     <div class="list">
-        {% raw %}
-        <script class="date-temp" type="x-tmpl-mustache">
-            <div class="date">{{ date }}</div>
-        </script>
-        <script class="post-temp" type="x-tmpl-mustache">
-            <div class="post">
-                <a class="link" href="{{ url }}" rel="nofollow">
-                    <div class="top">
-                        <span class="score">{{ score }}</span>
-                        <span class="title">{{ title }}</span>
-                    </div>
-                    <div class="tag">{{ tag }}</div>
-                </a>
-                <a class="perma" href="http://producthunt.com{{ perma }}" rel="nofollow">
-                    <span class="comment-icon fa fa-comments-o"></span>
-                    <span class="comment-count">{{ comments }}</span>
-                </a>
-            </div>
-        </script>
-        {% endraw %}
+        <div class="above-footer">
+            {% raw %}
+            <script class="date-temp" type="x-tmpl-mustache">
+                <div class="date">{{ date }}</div>
+            </script>
+            <script class="post-temp" type="x-tmpl-mustache">
+                <div class="post">
+                    <a class="link" href="{{ url }}" rel="nofollow">
+                        <div class="top">
+                            <span class="score">{{ score }}</span>
+                            <span class="title">{{ title }}</span>
+                        </div>
+                        <div class="tag">{{ tag }}</div>
+                    </a>
+                    <a class="perma" href="http://producthunt.com{{ perma }}" rel="nofollow">
+                        <span class="comment-icon fa fa-comments-o"></span>
+                        <span class="comment-count">{{ comments }}</span>
+                    </a>
+                </div>
+            </script>
+            {% endraw %}
+        </div>
+        <div class="footer">Loading...</div>
     </div>
 
     <div class="page">
