@@ -123,41 +123,46 @@ a {
   background-color: #eee;
   color: #919191;
 }
-.list .desktop {
+.list .plug {
   padding: 20px;
-  background-color: #fbeeea;
 }
-.list .desktop .title {
+.list .plug .title {
   color: #919191;
   font-size: 18px;
   font-weight: bold;
   text-align: center;
   margin-bottom: 20px;
 }
-.list .desktop .text {
+.list .plug .text {
   max-width: 600px;
   margin: 0 auto;
   color: #919191;
 }
-.list .desktop form input {
+.list .plug.desktop {
+  background-color: #fbeeea;
+}
+.list .plug.mobile {
+  background-color: #edfbea;
+}
+.list .plug form input {
   border: 2px solid #919191;
   border-radius: 5px;
   font-size: 16px;
   height: 40px;
   box-sizing: border-box;
 }
-.list .desktop form .email {
+.list .plug form .email {
   padding: 8px;
   width: 300px;
 }
-.list .desktop form .submit {
+.list .plug form .submit {
   cursor: pointer;
   color: #fff;
   font-weight: bold;
   background-color: #e89982;
   transition: background 0.5s;
 }
-.list .desktop form .submit:hover {
+.list .plug form .submit:hover {
   background-color: #e17758;
 }
 .page {

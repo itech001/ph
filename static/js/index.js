@@ -22,8 +22,13 @@ function getPage(num) {
 
             for(var j = 0; j < day.length; j++) {
                 var touch = 'ontouchstart' in document.documentElement;
-                if(j == 5 && num == 0 && !touch) {
-                    $('.list > .above-footer').append(Mustache.render(desktopTemp));
+                if(j == 5 && num == 0) {
+                    if(touch) {
+                        $('.list > .above-footer').append(Mustache.render(mobileTemp));
+                    }
+                    else {
+                        $('.list > .above-footer').append(Mustache.render(desktopTemp));
+                    }
                 }
 
                 var post = day[j];
@@ -56,7 +61,8 @@ var pageTemp = $('.page-temp').html();
 var headerBackTemp = $('.header-back-temp').html();
 var headerPhTemp = $('.header-ph-temp').html();
 var commentTemp = $('.comment-temp').html();
-var desktopTemp = $('.desktop-temp').html();
+var desktopTemp = $('.desktop-plug-temp').html();
+var mobileTemp = $('.mobile-plug-temp').html();
 Mustache.parse(postTemp);
 Mustache.parse(dateTemp);
 Mustache.parse(pageTemp);
