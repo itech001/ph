@@ -40,10 +40,9 @@ def scrape_page(num):
                     'perma': perma,
                     'comments': comments}
             page['days'][date].append(data)
-            sleep(5)
+            sleep(2)
 
     db.pages.update({'num': num}, page, True)
-    print('updated page ' + str(num))
 
 def scrape_disc(perma):
     disc = {'perma': perma, 'comments': [], 'updated': time()}
@@ -70,7 +69,6 @@ def scrape_disc(perma):
         disc['comments'].append(data)
 
     db.discs.update({'perma': perma}, disc, True)
-    print('scraped discussion ' + str(perma))
     return count
 
 def loop():
