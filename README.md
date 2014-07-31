@@ -35,7 +35,7 @@ you load the page).
 ### Dependencies
 
 - MongoDB
-- Python 3
+- Python 3 (`pip install -r requirements.txt`)
   - flask
   - stylus
   - pymongo
