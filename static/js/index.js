@@ -1,50 +1,30 @@
-function getPage(num) {
-    console.log('getting page ' + num);
-    $.post('/page', {num: num}, function(page) {
-        nextPage++;
-        var keys = []
+function getDay(ago) {
+    $.post('/day', {ago: ago}, function(posts) {
+        nexDay++;
+        $('.list > .above-footer').append(Mustache.render(dateTemp, {
+            date: new Date(posts.json[0].day).toDateString().slice(0, 10)
+        }));
 
-        for(k in page.json) {
-            keys.push(k);
-        }
-
-        keys.sort().reverse();
-
-        for(var i = 0; i < keys.length; i++) {
-            var day = page.json[keys[i]];
-            var date = new Date(
-                keys[i].replace(/(\d{4})-(\d{2})-(\d{2})/, '$1/$2/$3')
-            );
-
-            $('.list > .above-footer').append(Mustache.render(dateTemp, {
-                date: date.toDateString().slice(0, 10)
-            }));
-
-            for(var j = 0; j < day.length; j++) {
-                var touch = 'ontouchstart' in document.documentElement;
-                if(j == 5 && num == 0) {
-                    if(touch) {
-                        $('.list > .above-footer').append(Mustache.render(mobileTemp));
-                    }
-                    else {
-                        $('.list > .above-footer').append(Mustache.render(desktopTemp));
-                    }
-                }
-
-                var post = day[j];
-
-                $('.list > .above-footer').append(Mustache.render(postTemp, {
-                    title: post.title,
-                    tag: post.tag,
-                    url: post.url,
-                    perma: post.perma,
-                    score: post.score,
-                    comments: post.comments
-                }));
+        for(var i = 0; i < posts.json.length; i++) {
+            var touch = 'ontouchstart' in document.documentElement;
+            if(ago == 1 && i == 5 && touch) {
+                $('.list > .above-footer').append(Mustache.render(mobileTemp));
             }
+            else if (ago == 0 && i == 2 && !touch) {
+                $('.list > .above-footer').append(Mustache.render(desktopTemp));
+            }
+
+            $('.list > .above-footer').append(Mustache.render(postTemp, {
+                name: posts.json[i].name,
+                tag: posts.json[i].tagline,
+                url: posts.json[i].redirect_url,
+                disc: posts.json[i].discussion_url,
+                votes: posts.json[i].votes_count,
+                comments: posts.json[i].comments_count
+            }));
         }
 
-        $('.footer').text((num < 4) ? 'Load 2 more days of products'
+        $('.footer').text((ago < 4) ? 'Load 2 more days of products'
                                     : "You can't scroll any farther back! :0");
         loading = false;
     });
@@ -71,8 +51,8 @@ Mustache.parse(headerBackTemp);
 Mustache.parse(commentTemp);
 var open = 'list';
 var loading = true;
-var nextPage = 0
-getPage(nextPage);
+var nexDay = 0
+getDay(nexDay);
 
 $('.header').click(function() {
     if(open == 'list') {
@@ -81,10 +61,10 @@ $('.header').click(function() {
 });
 
 $('.footer').click(function() {
-    if(nextPage < 5 && !loading) {
+    if(nexDay < 5 && !loading) {
         loading = true;
         $('.footer').text('Loading...');
-        getPage(nextPage);
+        getDay(nexDay);
     }
 });
 
@@ -112,7 +92,7 @@ $('body').on('click', '.link', function(e) {
 
 function formatComment(text) {
     var urlExp = /(\bhttps?:\/\/\S+)/ig;
-    return text.replace(/\r/g, '<br><br>')
+    return text.replace(/\r/g, '<br>')
                .replace(urlExp, '<a href="$1" target="_blank">$1</a>')
 }
 
@@ -126,23 +106,23 @@ $('body').on('click', '.perma', function(e) {
         url: this.href
     }));
 
-    $.post('/disc', {perma: this.href.split('.com')[1]}, function(comments) {
+    $.post('/disc', {perma: this.href}, function(comments) {
         for(var i = 0; i < comments.json.length; i++) {
             var comment = comments.json[i];
             var children = ''
 
-            for(var j = 0; j < comment.children.length; j++) {
+            for(var j = 0; j < comment.child_comments.length; j++) {
                 children += Mustache.render(commentTemp, {
-                    name: comment.children[j].name,
-                    handle: comment.children[j].handle,
-                    text: formatComment(comment.children[j].text)
+                    name: comment.child_comments[j].user.name,
+                    handle: comment.child_comments[j].user.username,
+                    text: formatComment(comment.child_comments[j].body)
                 });
             }
 
             $('.discussion').append(Mustache.render(commentTemp, {
-                name: comment.name,
-                handle: comment.handle,
-                text: formatComment(comment.text),
+                name: comment.user.name,
+                handle: comment.user.username,
+                text: formatComment(comment.body),
                 children: children
             }));
         }
