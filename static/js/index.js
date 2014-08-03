@@ -1,27 +1,34 @@
 function getDay(ago) {
     $.post('/day', {ago: ago}, function(posts) {
         nexDay++;
-        $('.list > .above-footer').append(Mustache.render(dateTemp, {
-            date: new Date(posts.json[0].day).toDateString().slice(0, 10)
-        }));
 
-        for(var i = 0; i < posts.json.length; i++) {
-            var touch = 'ontouchstart' in document.documentElement;
-            if(ago == 1 && i == 5 && touch) {
-                $('.list > .above-footer').append(Mustache.render(mobileTemp));
-            }
-            else if (ago == 0 && i == 2 && !touch) {
-                $('.list > .above-footer').append(Mustache.render(desktopTemp));
-            }
-
-            $('.list > .above-footer').append(Mustache.render(postTemp, {
-                name: posts.json[i].name,
-                tag: posts.json[i].tagline,
-                url: posts.json[i].redirect_url,
-                disc: posts.json[i].discussion_url,
-                votes: posts.json[i].votes_count,
-                comments: posts.json[i].comments_count
+        if(posts.json.length) {
+            $('.list > .above-footer').append(Mustache.render(dateTemp, {
+                date: new Date(posts.json[0].day).toDateString().slice(0, 10)
             }));
+
+            for(var i = 0; i < posts.json.length; i++) {
+                var touch = 'ontouchstart' in document.documentElement;
+                if(ago == 1 && i == 5 && touch) {
+                    $('.list > .above-footer').append(
+                        Mustache.render(mobileTemp)
+                    );
+                }
+                else if (ago == 0 && i == 2 && !touch) {
+                    $('.list > .above-footer').append(
+                        Mustache.render(desktopTemp)
+                    );
+                }
+
+                $('.list > .above-footer').append(Mustache.render(postTemp, {
+                    name: posts.json[i].name,
+                    tag: posts.json[i].tagline,
+                    url: posts.json[i].redirect_url,
+                    disc: posts.json[i].discussion_url,
+                    votes: posts.json[i].votes_count,
+                    comments: posts.json[i].comments_count
+                }));
+            }
         }
 
         $('.footer').text((ago < 4) ? 'Load 2 more days of products'
