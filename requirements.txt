@@ -1,5 +1,4 @@
 requests==2.3.0
 pymongo==2.7.1
-beautifulsoup4==4.3.2
 Flask==0.10.1
 stylus==0.1.1
