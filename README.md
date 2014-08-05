@@ -7,7 +7,7 @@ heavily inspired by [hn.premii.com][hn].
 
 ## Features
 
-- **9 days of products.** Ph stores five pages (9 days) of the latest Product
+- **5 days of products.** Ph stores five days of the latest Product
 Hunt content. Most people will never need to look back that far.
 
 - **Inline product viewer.** Ph allows you to view product websites within the
