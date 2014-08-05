@@ -48,7 +48,9 @@ def cache_loop():
     try:
         cache_ph()
         sleep(300)
-    except:
+    except Exception as e:
+        print('Exception while downloading PH:')
+        print(e)
         sleep(900)
 
     cache_loop()
