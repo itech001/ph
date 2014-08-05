@@ -44,8 +44,14 @@ def cache_ph():
             }
             db.discs.update({'perma': disc['perma']}, disc, True)
 
-    sleep(300)
-    cache_ph()
+def cache_loop():
+    try:
+        cache_ph()
+        sleep(300)
+    except:
+        sleep(900)
+
+    cache_loop()
 
 @app.route('/')
 def index():
@@ -61,7 +67,6 @@ def day():
 @app.route('/disc', methods=['POST'])
 def disc():
     perma = dict(request.form)['perma'][0]
-    print(perma)
     return jsonify(json=db.discs.find_one({'perma': perma})['comments'])
 
 def compile():
@@ -79,6 +84,6 @@ if __name__ == '__main__':
     compile()
     db = MongoClient().ph
     db.discs.ensure_index('created_at', expireAfterSeconds=60*60*24*7)
-    Thread(target=cache_ph).start() # comment out when developing!
+    Thread(target=cache_loop).start() # comment out when developing!
     app.debug = False # turn on when developing for auto-compiling & debugging
     app.run(port=4001)
