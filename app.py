@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-from pprint import pprint
-from os import getcwd as cwd
+import os import path as path
 from glob import glob
 from flask import Flask, render_template, request, jsonify
 from stylus import Stylus
@@ -16,7 +15,7 @@ app = Flask(__name__)
 def cache_ph():
     base = 'https://api.producthunt.com/v1'
 
-    with open(cwd() + '/config.json') as config:
+    with open(fl + '/config.json') as config:
         config = json.load(config)['ph']
 
     auth = requests.post(base + '/oauth/token', data={
@@ -74,7 +73,7 @@ def disc():
 def compile():
     compiler = Stylus()
 
-    for fname in glob(cwd() + '/static/css/*.styl'):
+    for fname in glob(fl + '/static/css/*.styl'):
         print('compiling ' + fname)
         styl = open(fname, 'r')
         css = open(fname.replace('.styl', '.css'), 'w')
@@ -83,6 +82,7 @@ def compile():
         css.close()
 
 if __name__ == '__main__':
+    fl = path.dirname(__file__) # file location
     compile()
     db = MongoClient().ph
     db.discs.ensure_index('created_at', expireAfterSeconds=60*60*24*7)
