@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import os import path as path
+from os import path as path
 from glob import glob
 from flask import Flask, render_template, request, jsonify
 from stylus import Stylus
