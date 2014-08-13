@@ -83,6 +83,7 @@ def compile():
 
 if __name__ == '__main__':
     fl = path.dirname(__file__) # file location
+    if fl == '': fl = '.'
     compile()
     db = MongoClient().ph
     db.discs.ensure_index('created_at', expireAfterSeconds=60*60*24*7)
