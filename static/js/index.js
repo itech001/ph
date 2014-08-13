@@ -4,7 +4,7 @@ function getDay(ago) {
 
         if(posts.json.length) {
             $('.list > .above-footer').append(Mustache.render(dateTemp, {
-                date: new Date(posts.json[0].day).toDateString().slice(0, 10)
+                date: new Date(posts.json[0].day).toUTCString().slice(0, 11)
             }));
 
             for(var i = 0; i < posts.json.length; i++) {
