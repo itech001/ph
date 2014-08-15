@@ -31,7 +31,7 @@ function getDay(ago) {
             }
         }
 
-        $('.footer').text((ago < 4) ? 'Load 2 more days of products'
+        $('.footer').text((ago < 4) ? 'Load another day of products'
                                     : "You can't scroll any farther back! :0");
         loading = false;
     });
