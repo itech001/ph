@@ -9,7 +9,7 @@ from threading import Thread
 import json
 import requests
 from time import sleep
-from datetime import datetime
+from datetime import datetime, timedelta
 app = Flask(__name__)
 
 def cache_ph():
@@ -44,6 +44,9 @@ def cache_ph():
             db.discs.update({'perma': disc['perma']}, disc, True)
 
 def cache_loop():
+    old = {'created_at': {'$lt': datetime.now() - timedelta(days=6)}}
+    db.discs.remove(old)
+
     try:
         cache_ph()
         sleep(300)
@@ -86,7 +89,6 @@ if __name__ == '__main__':
     if fl == '': fl = '.'
     compile()
     db = MongoClient().ph
-    db.discs.ensure_index('created_at', expireAfterSeconds=60*60*24*7)
     Thread(target=cache_loop).start() # comment out when developing!
     app.debug = False # turn on when developing for auto-compiling & debugging
     app.run(port=4001)
