@@ -25,10 +25,10 @@ unexpected lag on mobile!
 Ph uses Product Hunt's API, which is currently invite-only. To run Ph you need
 to update *config.json* with your API Client ID and Client Secret.
 
-Ph uses [Stylus][stylus] with [Nib][nib] for CSS.
+Ph uses [Stylus][stylus] for CSS.
 
 Run *app.py* and allow it to scrape at least one full page before viewing Ph at
-`localhost:4001`. When developing switch `app.debug = False` to `app.debug =
+`localhost:80`. When developing switch `app.debug = False` to `app.debug =
 True` at the bottom of *app.py* for Flask's built-in debugging tools and auto
 CSS compiling (compiles every time you load the page).
 
@@ -42,9 +42,8 @@ CSS compiling (compiles every time you load the page).
   - requests
 - Node.js (`npm install`)
   - stylus
-  - nib
 
-The core of Ph is all Python based, but Node.js is used for Stylus/Nib.
+The core of Ph is all Python based, but Node.js is used for Stylus.
 
 
 # TODO
@@ -61,6 +60,5 @@ the parent website to their own URL. This should be blocked.
 [ph]: http://ph.bram.gg
 [hn]: http://hn.premii.com
 [stylus]: https://learnboost.github.io/stylus/
-[nib]: https://visionmedia.github.io/nib/
 [ex]: http://example.com
 [screenshot]: promo/android-screenshot.png
