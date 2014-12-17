@@ -91,4 +91,4 @@ if __name__ == '__main__':
     db = MongoClient().ph
     Thread(target=cache_loop).start() # comment out when developing!
     app.debug = False # turn on when developing for auto-compiling & debugging
-    app.run(port=80, host='0.0.0.0')
+    app.run(port=4000)
